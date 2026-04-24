@@ -25,10 +25,13 @@ readonly class AuthController
 
         $user = $this->userService->create($data);
 
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         return response()->json([
             'success' => true,
             'message' => 'کاربر جدید با موفقیت ایجاد شد.',
             'data' => $user,
+            'token' => $token,
         ], Response::HTTP_CREATED);
     }
 }
