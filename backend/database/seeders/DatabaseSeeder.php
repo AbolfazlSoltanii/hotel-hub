@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Reservation\PaymentStatusSeeder;
+use Database\Seeders\Reservation\ReservationStatusSeeder;
 use Database\Seeders\Room\RoomStatusSeeder;
 use Database\Seeders\Room\RoomTypeSeeder;
 use Database\Seeders\User\GenderSeeder;
@@ -27,6 +29,8 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             RoomStatusSeeder::class,
             RoomTypeSeeder::class,
+            ReservationStatusSeeder::class,
+            PaymentStatusSeeder::class,
         ]);
     }
 }
