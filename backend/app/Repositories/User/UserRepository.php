@@ -51,4 +51,11 @@ readonly class UserRepository
             ->where('code', Role::MANAGER_CODE)
             ->exists();
     }
+
+    public function getByPhone(string $phone)
+    {
+        return $this->user->query()
+            ->where('phone', $phone)
+            ->first();
+    }
 }

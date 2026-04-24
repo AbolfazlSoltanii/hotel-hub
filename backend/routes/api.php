@@ -10,7 +10,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\Profile\UserProfileController;
 use App\Http\Controllers\User\UserController;
 
-//Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -22,4 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('amenity', AmenityController::class)->except(['create', 'edit']);
 
     Route::patch('user-profile/{userId}', [UserProfileController::class, 'updateByUserId']);
+
+    Route::post('logout', [AuthController::class, 'logout']);
 });
