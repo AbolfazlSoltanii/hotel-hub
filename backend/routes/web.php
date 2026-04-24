@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Hotel\HotelController;
+use App\Http\Controllers\Hotel\Review\ReviewController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -7,3 +9,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register']);
 
 Route::resource('user', UserController::class)->except(['create', 'edit']);
+Route::resource('hotel', HotelController::class)->except(['create', 'edit']);
+Route::resource('review', ReviewController::class)->except(['create', 'edit']);
