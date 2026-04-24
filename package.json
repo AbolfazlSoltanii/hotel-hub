@@ -1,0 +1,22 @@
+{
+  "name": "hotel-hub",
+  "version": "1.0.0",
+  "description": "The website to manage hotels",
+  "main": "index.js",
+  "scripts": {
+    "backend": "cd backend && php artisan serve",
+    "frontend": "cd frontend && npm run dev",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install:all": "cd backend && composer install && cd ../frontend && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.4"
+  }
+}
