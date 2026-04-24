@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\User\Auth;
 
 use App\Models\User\Role;
 use App\Models\User\UserStatus;

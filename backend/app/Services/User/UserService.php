@@ -85,4 +85,9 @@ readonly class UserService
     {
         return $this->userRepository->isManagerExists($userId);
     }
+
+    public function getByPhone(string $phone)
+    {
+        return $this->userRepository->getByPhone($phone);
+    }
 }

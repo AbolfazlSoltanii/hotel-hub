@@ -203,6 +203,7 @@ return [
         'password_confirmation' => 'تایید گذرواژه',
         'user_status_id' => 'وضعیت کاربر',
         'role_ids' => 'نقش کاربر',
+        'role_ids.*' => 'نقش کاربر',
         'first_name' => 'نام',
         'last_name' => 'نام خانوادگی',
         'rating' => 'امتیاز',
