@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Room\RoomStatusSeeder;
+use Database\Seeders\Room\RoomTypeSeeder;
 use Database\Seeders\User\GenderSeeder;
 use Database\Seeders\User\RoleSeeder;
 use Database\Seeders\User\UserStatusSeeder;
@@ -23,6 +25,8 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             ProvinceSeeder::class,
             CitySeeder::class,
+            RoomStatusSeeder::class,
+            RoomTypeSeeder::class,
         ]);
     }
 }
