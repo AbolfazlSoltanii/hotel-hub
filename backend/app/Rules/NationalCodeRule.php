@@ -30,7 +30,7 @@ class NationalCodeRule implements ValidationRule
         $controlDigit = $remainder < 2 ? $remainder : 11 - $remainder;
 
         if ((int)$code[9] !== $controlDigit) {
-            $fail(__('validation.national_code.NationalCodeRule.in_valid'));
+            $fail(__('validation.national_code.in_valid'));
         }
     }
 }
