@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Amenity\AmenityController;
 use App\Http\Controllers\Hotel\HotelController;
 use App\Http\Controllers\Hotel\Review\ReviewController;
 use App\Http\Controllers\Reservation\ReservationController;
@@ -15,3 +16,4 @@ Route::resource('hotel', HotelController::class)->except(['create', 'edit']);
 Route::resource('review', ReviewController::class)->except(['create', 'edit']);
 Route::resource('room', RoomController::class)->except(['create', 'edit']);
 Route::resource('reservation', ReservationController::class)->except(['create', 'edit']);
+Route::resource('amenity', AmenityController::class)->except(['create', 'edit']);

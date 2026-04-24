@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Amenity\AmenityCategorySeeder;
 use Database\Seeders\Reservation\PaymentStatusSeeder;
 use Database\Seeders\Reservation\ReservationStatusSeeder;
 use Database\Seeders\Room\RoomStatusSeeder;
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
             RoomTypeSeeder::class,
             ReservationStatusSeeder::class,
             PaymentStatusSeeder::class,
+            AmenityCategorySeeder::class
         ]);
     }
 }
