@@ -25,13 +25,6 @@ readonly class AuthController
      */
     public function register(RegisterUserRequest $request): JsonResponse
     {
-        if (Auth::check()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'شما قبلاً وارد سیستم شده‌اید! برای ثبت نام ابتدا خارج شوید.',
-            ], Response::HTTP_FORBIDDEN);
-        }
-
         $data = $request->validated();
 
         $user = $this->userService->create($data);
@@ -48,13 +41,6 @@ readonly class AuthController
 
     public function login(LoginUserRequest $request): JsonResponse
     {
-        if (Auth::check()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'شما قبلاً وارد سیستم شده‌اید!',
-            ], Response::HTTP_FORBIDDEN);
-        }
-
         $data = $request->validated();
 
         $phone = $data['phone'];
