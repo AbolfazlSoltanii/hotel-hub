@@ -1,13 +1,49 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Vazirmatn";
-  src: url("/fonts/Vazir.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "Vazirmatn";
+    src: url("/fonts/Vazir.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
-body {
-  font-family: "Vazirmatn", Tahoma, sans-serif;
+* {
+    font-family: "Vazirmatn", Tahoma, sans-serif !important;
+}
+
+@theme {
+    --color-primary-50: #e8edf5;
+    --color-primary-100: #d1dbea;
+    --color-primary-200: #a3b7d5;
+    --color-primary-300: #7593c0;
+    --color-primary-400: #4770ab;
+    --color-primary-500: #1a3a5f;
+    --color-primary-600: #152e4c;
+    --color-primary-700: #102339;
+    --color-primary-800: #0a1726;
+    --color-primary-900: #050c13;
+
+    --color-secondary-50: #faf6ec;
+    --color-secondary-100: #f4ecd9;
+    --color-secondary-200: #e9d9b3;
+    --color-secondary-300: #dec68d;
+    --color-secondary-400: #d3b367;
+    --color-secondary-500: #c9a03d;
+    --color-secondary-600: #b48a2e;
+    --color-secondary-700: #9f7425;
+    --color-secondary-800: #8a5e1c;
+    --color-secondary-900: #754813;
+
+    --color-success-500: #10b981;
+    --color-success-600: #059669;
+
+    --color-error-500: #ef4444;
+    --color-error-600: #dc2626;
+
+    --color-warning-500: #f59e0b;
+    --color-warning-600: #d97706;
+
+    --color-info-500: #3b82f6;
+    --color-info-600: #2563eb;
 }
