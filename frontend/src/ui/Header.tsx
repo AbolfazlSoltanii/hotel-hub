@@ -1,29 +1,43 @@
 import type { FC } from "react";
 import Logo from "./Logo";
 import { Avatar, Container } from "@mui/material";
+import { useAuth } from "../hooks/useAuth.ts";
 
 const Header: FC = () => {
-    return (
-        <header className="bg-[#F59E0B] p-2">
-            <Container className="flex items-center justify-between">
-                <div>
-                    <Logo />
-                </div>
+  const { isAuthenticated, user } = useAuth();
+  const phone = user?.phone;
 
-                <nav className="flex items-center gap-6 text-white font-medium">
-                    <a href={'/'} className="hover:text-gray-200 hover:font-bold">خانه</a>
-                    <a href="/hotels" className="hover:text-gray-200 hover:font-bold">هتل</a>
-                    <a href="/about" className="hover:text-gray-200 hover:font-bold">درباره ما</a>
-                    <a href="/contact" className="hover:text-gray-200 hover:font-bold">تماس با ما</a>
-                </nav>
+  return (
+    <header className="bg-primary-500 p-2">
+      <Container className="flex items-center justify-between">
+        <div>
+          <Logo />
+        </div>
 
-                <div className="flex items-center justify-center gap-3">
-                    <Avatar />
-                    <span className='text-white cursor-pointer'>ورود | خروج</span>
-                </div>
-            </Container>
-        </header>
-    );
-}
+        <nav className="flex items-center gap-6 font-medium text-white">
+          <a href={"/"} className="hover:font-bold hover:text-gray-200">
+            خانه
+          </a>
+          <a href="/hotels" className="hover:font-bold hover:text-gray-200">
+            هتل
+          </a>
+          <a href="/about" className="hover:font-bold hover:text-gray-200">
+            درباره ما
+          </a>
+          <a href="/contact" className="hover:font-bold hover:text-gray-200">
+            تماس با ما
+          </a>
+        </nav>
+
+        <div className="flex items-center justify-center gap-3">
+          <Avatar />
+          <span className="cursor-pointer text-white">
+            {isAuthenticated ? phone : "ورود"}
+          </span>
+        </div>
+      </Container>
+    </header>
+  );
+};
 
 export default Header;
