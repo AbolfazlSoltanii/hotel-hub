@@ -1,23 +1,21 @@
-import { type FC, useState } from "react";
+import { type FC } from "react";
 import {
   Box,
   Button,
   Checkbox,
   FormControlLabel,
   Paper,
-  TextField,
   Typography,
-  IconButton,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useNavigate } from "react-router";
 import { authApi } from "../../services/auth/authApi.ts";
 import { useAuth } from "../../hooks/useAuth.ts";
 import type { LoginRequest, LoginResponse } from "../../types/Auth.ts";
+import PhoneInput from "../../ui/PhoneInput.tsx";
+import PasswordInput from "../../ui/PasswordInput.tsx";
 
 const Login: FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const { login, isAuthenticated } = useAuth();
@@ -30,10 +28,6 @@ const Login: FC = () => {
     mode: "onChange",
   });
 
-  if (isAuthenticated) {
-    return <Navigate to={"/"} replace />;
-  }
-
   const onSubmit = async (data: LoginRequest) => {
     const response = (await authApi.login(data)) as LoginResponse;
 
@@ -44,6 +38,10 @@ const Login: FC = () => {
     login(response.token, response.user);
     navigate("/");
   };
+
+  if (isAuthenticated) {
+    return <Navigate to={"/"} replace />;
+  }
 
   return (
     <Box
@@ -66,44 +64,18 @@ const Login: FC = () => {
             به خانواده بزرگ ما خوش آمدید.
           </Typography>
 
-          <TextField
-            label={"تلفن"}
-            fullWidth={true}
-            type={"tel"}
-            error={!!errors.phone}
-            helperText={errors.phone?.message}
-            {...register("phone", {
-              required: "شماره تلفن الزامی است",
-              pattern: {
-                value: /^09[0-9]{9}$/,
-                message: "شماره تلفن باید 11 رقم و با 09 شروع شود",
-              },
-            })}
+          <PhoneInput<LoginRequest>
+            register={register}
+            errors={errors}
+            name={"phone"}
           />
 
-          <div className="relative w-full">
-            <TextField
-              label={"رمز عبور"}
-              fullWidth={true}
-              type={showPassword ? "text" : "password"}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              {...register("password", {
-                required: "رمز عبور الزامی است",
-                minLength: {
-                  value: 4,
-                  message: "رمز عبور حداقل 4 کاراکتر است",
-                },
-              })}
-            />
-            <IconButton
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute! top-1/5 left-2"
-              size="small"
-            >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </div>
+          <PasswordInput<LoginRequest>
+            register={register}
+            errors={errors}
+            name={"password"}
+            label={"رمز عبور"}
+          />
 
           <div className={"flex w-full items-center justify-between"}>
             <FormControlLabel
