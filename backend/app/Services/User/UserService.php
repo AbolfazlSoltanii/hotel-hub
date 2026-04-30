@@ -38,7 +38,7 @@ readonly class UserService
 
             $profileData = [
                 'first_name' => $data['first_name'],
-                'last_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
             ];
 
             unset($data['first_name'], $data['last_name']);
@@ -86,8 +86,8 @@ readonly class UserService
         return $this->userRepository->isManagerExists($userId);
     }
 
-    public function getByPhone(string $phone)
+    public function getInfoByPhone(string $phone)
     {
-        return $this->userRepository->getByPhone($phone);
+        return $this->userRepository->getInfoByPhone($phone);
     }
 }

@@ -29,12 +29,16 @@ readonly class AuthController
 
         $user = $this->userService->create($data);
 
+        $userInfo = $this->userService->getInfoByPhone($data['phone']);
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'success' => true,
             'message' => 'کاربر جدید با موفقیت ایجاد شد.',
-            'data' => $user,
+            'user' => $userInfo?->only([
+                'id', 'email', 'phone', 'user_status_id', 'full_name'
+            ]),
             'token' => $token,
         ], Response::HTTP_CREATED);
     }
@@ -51,14 +55,16 @@ readonly class AuthController
             ]);
         }
 
-        $user = $this->userService->getByPhone($phone);
+        $user = $this->userService->getInfoByPhone($phone);
 
         $token = $user?->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'success' => true,
             'message' => 'با موفقیت وارد شدید.',
-            'user' => $user,
+            'user' => $user?->only([
+                'id', 'email', 'phone', 'user_status_id', 'full_name'
+            ]),
             'token' => $token,
         ], Response::HTTP_OK);
     }

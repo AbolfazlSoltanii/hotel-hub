@@ -5,6 +5,7 @@ namespace App\Repositories\User;
 use App\Models\User\Role;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 readonly class UserRepository
 {
@@ -52,10 +53,15 @@ readonly class UserRepository
             ->exists();
     }
 
-    public function getByPhone(string $phone)
+    public function getInfoByPhone(string $phone)
     {
         return $this->user->query()
-            ->where('phone', $phone)
+            ->select([
+                'users.*',
+                DB::raw('CONCAT(user_profiles.first_name, " ", user_profiles.last_name) AS full_name'),
+            ])
+            ->join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->where('users.phone', $phone)
             ->first();
     }
 }
