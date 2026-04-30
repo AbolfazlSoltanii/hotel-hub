@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth.ts";
 
 const Header: FC = () => {
   const { isAuthenticated, user } = useAuth();
-  const phone = user?.phone;
+  const fullName = user?.full_name;
 
   return (
     <header className="bg-primary-500 p-2">
@@ -32,7 +32,7 @@ const Header: FC = () => {
         <div className="flex items-center justify-center gap-3">
           <Avatar />
           <span className="cursor-pointer text-white">
-            {isAuthenticated ? phone : "ورود"}
+            {isAuthenticated ? fullName : "ورود"}
           </span>
         </div>
       </Container>

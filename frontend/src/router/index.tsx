@@ -3,6 +3,7 @@ import { ProtectedRoute } from "../features/ProtectedRoute.tsx";
 import { Suspense } from "react";
 import Loading from "../ui/Loading.tsx";
 import { AppLayout, Login, NotFound } from "./lazyImports.ts";
+import Register from "../pages/auth/Register.tsx";
 
 const index = createBrowserRouter([
   {
@@ -10,6 +11,14 @@ const index = createBrowserRouter([
     element: (
       <Suspense fallback={<Loading />}>
         <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: "register",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Register />
       </Suspense>
     ),
   },
