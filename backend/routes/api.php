@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\Gender\GenderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Amenity\AmenityController;
 use App\Http\Controllers\Hotel\HotelController;
@@ -20,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('room', RoomController::class)->except(['create', 'edit']);
     Route::resource('reservation', ReservationController::class)->except(['create', 'edit']);
     Route::resource('amenity', AmenityController::class)->except(['create', 'edit']);
+
+    Route::get('gender', [GenderController::class, 'index']);
 
     Route::patch('user-profile/{userId}', [UserProfileController::class, 'updateByUserId']);
 
