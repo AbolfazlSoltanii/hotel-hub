@@ -5,8 +5,8 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import type { User } from "../types/User.ts";
-import type { AuthContextType } from "../types/Auth.ts";
+import type { User } from "../types/user.ts";
+import type { AuthContextType } from "../types/auth.ts";
 import { authReducer, initialState } from "../reducers/authReducer.ts";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -35,14 +35,14 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   }, []);
 
-  const login = (newToken: string, newUser: User) => {
+  const login = (newToken?: string, newUser?: User) => {
     dispatch({
       type: "RESTORE_AUTH",
       user: newUser,
       token: newToken,
     });
 
-    localStorage.setItem("token", newToken);
+    localStorage.setItem("token", newToken || "");
     localStorage.setItem("user", JSON.stringify(newUser));
   };
 

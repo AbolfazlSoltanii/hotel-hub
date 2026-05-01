@@ -1,4 +1,4 @@
-import type { User } from "./User.ts";
+import type { User } from "./user.ts";
 
 export interface LoginRequest {
   phone: string;
@@ -16,17 +16,17 @@ export interface LoginResponse {
 }
 
 export interface AuthContextType {
-  user: User | null;
-  token: string | null;
+  user?: User;
+  token?: string;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (token: string, user: User) => void;
+  login: (token?: string, user?: User) => void;
   logout: () => void;
 }
 
 export interface AuthState {
-  user: User | null;
-  token: string | null;
+  user?: User;
+  token?: string;
   isLoading: boolean;
 }
 
@@ -34,4 +34,4 @@ export type AuthAction =
   | { type: "LOGIN"; token: string; user: User }
   | { type: "LOGOUT" }
   | { type: "SET_LOADING"; isLoading: boolean }
-  | { type: "RESTORE_AUTH"; token: string; user: User };
+  | { type: "RESTORE_AUTH"; token?: string; user?: User };

@@ -1,5 +1,5 @@
 import { Snackbar, Alert } from "@mui/material";
-import type { ToastProps } from "../types/Toast.ts";
+import type { ToastProps } from "../types/toast.ts";
 
 const Toast = ({ open, message, severity, onClose }: ToastProps) => {
   const getGradient = () => {

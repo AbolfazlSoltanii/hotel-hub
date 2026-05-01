@@ -3,7 +3,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from "axios";
-import type { ErrorResponse, ToastHandler } from "../types/Error.ts";
+import type { ErrorResponse, ToastHandler } from "../types/error.ts";
 
 let globalShowToast: ToastHandler | null = null;
 
@@ -40,7 +40,8 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     if (
-      response.config.method?.toLowerCase() === "post" &&
+      response.config.method &&
+      ["post", "patch"].includes(response.config.method.toLowerCase()) &&
       response.data?.message
     ) {
       globalShowToast?.(response.data.message, "success");

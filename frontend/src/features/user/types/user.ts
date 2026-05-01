@@ -1,9 +1,16 @@
 export interface User {
-  id: number;
-  name: string;
-  phone: string;
+  id?: number;
+  name?: string;
+  phone?: string;
   email?: string;
   full_name?: string;
+  first_name?: string;
+  last_name?: string;
+  national_code?: string;
+  birth_date?: string;
+  gender_id?: number;
+  address?: string;
+  avatar?: string;
 }
 
 export interface RegisterRequest {

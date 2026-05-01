@@ -8,7 +8,7 @@ const AppLayout: FC = () => {
     <div>
       <Header />
 
-      <Container>
+      <Container className={"pt-20"}>
         <Outlet />
       </Container>
     </div>
