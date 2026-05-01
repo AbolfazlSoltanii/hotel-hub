@@ -34,6 +34,8 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->route('userId');
+
         return [
             'userId' => [
                 'required',
@@ -54,6 +56,7 @@ class UpdateProfileRequest extends FormRequest
                 'size:10',
                 new NationalCodeRule(),
                 Rule::unique(UserProfile::class, 'national_code')
+                    ->whereNot('user_id', $userId)
             ],
             'birth_date' => 'nullable|date',
             'address' => 'nullable|string',
