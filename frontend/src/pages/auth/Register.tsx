@@ -11,7 +11,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { Link, Navigate, useNavigate } from "react-router";
 import { useAuth } from "../../hooks/useAuth.ts";
 import PasswordInput from "../../ui/PasswordInput.tsx";
-import type { RegisterRequest, RegisterResponse } from "../../types/User.ts";
+import type {
+  RegisterRequest,
+  RegisterResponse,
+} from "../../types/User/User.ts";
 import { userApi } from "../../services/user/userApi.ts";
 import { motion } from "framer-motion";
 

@@ -40,7 +40,8 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     if (
-      response.config.method?.toLowerCase() === "post" &&
+      response.config.method &&
+      ["post", "patch"].includes(response.config.method.toLowerCase()) &&
       response.data?.message
     ) {
       globalShowToast?.(response.data.message, "success");

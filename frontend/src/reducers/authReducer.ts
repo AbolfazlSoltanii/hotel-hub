@@ -1,8 +1,8 @@
 import type { AuthAction, AuthState } from "../types/Auth.ts";
 
 export const initialState = {
-  token: null,
-  user: null,
+  token: undefined,
+  user: undefined,
   isLoading: true,
 };
 
@@ -20,8 +20,8 @@ export const authReducer = (
 
     case "LOGOUT":
       return {
-        user: null,
-        token: null,
+        user: undefined,
+        token: undefined,
         isLoading: false,
       };
 
