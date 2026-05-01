@@ -14,10 +14,19 @@ use Throwable;
 
 readonly class AuthController
 {
+    private array $exceptUserFields;
+
     public function __construct(
         private UserService $userService
     )
     {
+        $this->exceptUserFields = [
+            'password',
+            'remember_token',
+            'created_at',
+            'updated_at',
+            'deleted_at'
+        ];
     }
 
     /**
@@ -36,9 +45,7 @@ readonly class AuthController
         return response()->json([
             'success' => true,
             'message' => 'کاربر جدید با موفقیت ایجاد شد.',
-            'user' => $userInfo?->only([
-                'id', 'email', 'phone', 'user_status_id', 'full_name'
-            ]),
+            'user' => $userInfo?->except($this->exceptUserFields),
             'token' => $token,
         ], Response::HTTP_CREATED);
     }
@@ -62,9 +69,7 @@ readonly class AuthController
         return response()->json([
             'success' => true,
             'message' => 'با موفقیت وارد شدید.',
-            'user' => $user?->only([
-                'id', 'email', 'phone', 'user_status_id', 'full_name'
-            ]),
+            'user' => $user?->except($this->exceptUserFields),
             'token' => $token,
         ], Response::HTTP_OK);
     }

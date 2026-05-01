@@ -58,6 +58,13 @@ readonly class UserRepository
         return $this->user->query()
             ->select([
                 'users.*',
+                'user_profiles.gender_id',
+                'user_profiles.first_name',
+                'user_profiles.last_name',
+                'user_profiles.national_code',
+                'user_profiles.birth_date',
+                'user_profiles.address',
+                'user_profiles.avatar',
                 DB::raw('CONCAT(user_profiles.first_name, " ", user_profiles.last_name) AS full_name'),
             ])
             ->join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
