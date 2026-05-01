@@ -5,6 +5,9 @@ import { CssBaseline } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import rtlPlugin from "stylis-plugin-rtl";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
+import { faIR } from "date-fns-jalali/locale/fa-IR";
 
 import { useToast } from "./hooks/useToast";
 import { setGlobalToastHandler } from "./services/axios.config";
@@ -28,18 +31,23 @@ const App: FC = () => {
 
   return (
     <AuthProvider>
-      <CacheProvider value={cacheRtl}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <RouterProvider router={index} />
-        </ThemeProvider>
-      </CacheProvider>
-      <Toast
-        open={toast.open}
-        message={toast.message}
-        severity={toast.severity}
-        onClose={hideToast}
-      />
+      <LocalizationProvider
+        dateAdapter={AdapterDateFnsJalali}
+        adapterLocale={faIR}
+      >
+        <CacheProvider value={cacheRtl}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <RouterProvider router={index} />
+          </ThemeProvider>
+        </CacheProvider>
+        <Toast
+          open={toast.open}
+          message={toast.message}
+          severity={toast.severity}
+          onClose={hideToast}
+        />
+      </LocalizationProvider>
     </AuthProvider>
   );
 };
