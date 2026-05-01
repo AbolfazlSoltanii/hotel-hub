@@ -5,7 +5,6 @@ namespace App\Repositories\User;
 use App\Models\User\Role;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 
 readonly class UserRepository
 {
@@ -65,7 +64,6 @@ readonly class UserRepository
                 'user_profiles.birth_date',
                 'user_profiles.address',
                 'user_profiles.avatar',
-                DB::raw('CONCAT(user_profiles.first_name, " ", user_profiles.last_name) AS full_name'),
             ])
             ->join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->where('users.phone', $phone)
