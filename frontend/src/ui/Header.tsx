@@ -10,7 +10,7 @@ import {
   IconButton,
   CircularProgress,
 } from "@mui/material";
-import { useAuth } from "../hooks/useAuth.ts";
+import { useAuth } from "../features/user/hooks/useAuth.ts";
 import { useNavigate } from "react-router";
 import {
   AccountCircle,
@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import * as React from "react";
 import Navigation from "./Navigation.tsx";
-import { authApi } from "../services/auth/authApi.ts";
+import { authApi } from "../features/user/services/authApi.ts";
 
 const Header: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

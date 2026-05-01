@@ -1,4 +1,4 @@
-import type { ProfileAction, ProfileState } from "../types/Profile.ts";
+import type { ProfileAction, ProfileState } from "../types/profile.ts";
 
 export const initialState: ProfileState = {
   avatar: undefined,

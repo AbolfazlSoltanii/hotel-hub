@@ -1,37 +1,55 @@
-import { type FC } from "react";
 import {
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
   Paper,
+  TextField,
   Typography,
   CircularProgress,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
+import PhoneInput from "../../../features/user/components/PhoneInput.tsx";
+import { useForm, useWatch } from "react-hook-form";
 import { Link, Navigate, useNavigate } from "react-router";
-import { authApi } from "../../services/auth/authApi.ts";
-import { useAuth } from "../../hooks/useAuth.ts";
-import type { LoginRequest, LoginResponse } from "../../types/Auth.ts";
-import PhoneInput from "../../ui/PhoneInput.tsx";
-import PasswordInput from "../../ui/PasswordInput.tsx";
+import { useAuth } from "../../../features/user/hooks/useAuth.ts";
+import PasswordInput from "../../../features/user/components/PasswordInput.tsx";
+import type {
+  RegisterRequest,
+  RegisterResponse,
+} from "../../../features/user/types/user.ts";
+import { userApi } from "../../../features/user/services/userApi.ts";
 import { motion } from "framer-motion";
+import PersonalInfoForm from "../../../features/user/components/PersonalInfoForm.tsx";
 
-const Login: FC = () => {
+const Register = () => {
+  const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useAuth();
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
-  } = useForm<LoginRequest>({
+  } = useForm<RegisterRequest>({
     mode: "onChange",
   });
 
-  const onSubmit = async (data: LoginRequest) => {
-    const response = (await authApi.login(data)) as LoginResponse;
-    if (!response.user) return;
+  const password = useWatch({
+    control,
+    name: "password",
+  });
+
+  const onSubmit = async (data: RegisterRequest) => {
+    const modifiedData = {
+      ...data,
+      user_status_id: 1,
+      role_ids: [3],
+    };
+
+    const response = (await userApi.register(modifiedData)) as RegisterResponse;
+
+    if (!response.user) {
+      return false;
+    }
+
     login(response.token, response.user);
     navigate("/");
   };
@@ -42,10 +60,8 @@ const Login: FC = () => {
 
   return (
     <Box
-      className="from-primary-50 via-primary-100 to-primary-200 flex min-h-screen items-center justify-center bg-linear-to-bl p-4"
+      className="from-primary-50 via-primary-100 to-primary-200 hidde relative flex min-h-screen items-center justify-center overflow-hidden! bg-linear-to-bl p-4"
       sx={{
-        position: "relative",
-        overflow: "hidden",
         "&::before": {
           content: '""',
           position: "absolute",
@@ -74,9 +90,9 @@ const Login: FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
+        className="w-full max-w-2xl"
       >
-        <Paper className="relative overflow-hidden rounded-2xl! p-8 shadow-2xl!">
+        <Paper className="relative overflow-hidden rounded-2xl! p-6 shadow-2xl! sm:p-10">
           <Box
             className="absolute! top-0! right-0! left-0! h-1!"
             sx={{
@@ -109,50 +125,73 @@ const Login: FC = () => {
                 color: "transparent",
               }}
             >
-              خوش آمدید
+              عضو شوید
             </Typography>
 
             <Typography className="text-sm! text-gray-400!">
-              برای ورود اطلاعات خود را وارد کنید
+              به خانواده بزرگ هتل هاب بپیوندید
             </Typography>
 
             <Box
-              className="mx-auto mt-4! h-0.5! rounded-full! md:w-xs!"
+              className="mx-auto mt-4! h-0.5! rounded-full! md:w-sm!"
               sx={{ background: "linear-gradient(90deg, #C9A03D, #1A3A5F)" }}
             />
           </Box>
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-5"
+            onSubmit={handleSubmit(onSubmit)}
           >
-            <PhoneInput<LoginRequest>
-              register={register}
+            <PersonalInfoForm<RegisterRequest>
               errors={errors}
-              name="phone"
+              register={register}
             />
 
-            <PasswordInput<LoginRequest>
-              register={register}
-              errors={errors}
-              name="password"
-              label="رمز عبور"
-            />
-
-            <div className="flex w-full items-center justify-between">
-              <FormControlLabel
-                control={<Checkbox {...register("remember_me")} />}
-                label="مرا به خاطر بسپار"
-                classes={{ label: "!text-[13px] !text-gray-500" }}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <TextField
+                label="ایمیل"
+                fullWidth
+                type="email"
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                {...register("email", {
+                  required: "ایمیل الزامی است",
+                })}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "12px!",
+                  },
+                }}
               />
 
-              <Link
-                to="/forgot-password"
-                className="text-[13px]! font-medium! transition-all duration-300 hover:underline md:text-sm!"
-                style={{ color: "#C9A03D" }}
-              >
-                رمزعبور را فراموش کردم؟
-              </Link>
+              <PhoneInput<RegisterRequest>
+                register={register}
+                errors={errors}
+                name="phone"
+              />
+
+              <PasswordInput<RegisterRequest>
+                label="رمز عبور"
+                register={register}
+                errors={errors}
+                name="password"
+              />
+
+              <PasswordInput<RegisterRequest>
+                label="تایید رمز عبور"
+                register={register}
+                errors={errors}
+                name="password_confirmation"
+                validation={{
+                  required: "تایید رمز عبور الزامی است",
+                  validate: (value: string) => {
+                    if (!value) return "تایید رمز عبور الزامی است";
+                    if (value !== password)
+                      return "رمز عبور و تکرار آن مطابقت ندارند";
+                    return true;
+                  },
+                }}
+              />
             </div>
 
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -162,7 +201,7 @@ const Login: FC = () => {
                 fullWidth
                 size="large"
                 disabled={isSubmitting}
-                className="py-3! text-base! font-semibold! normal-case! shadow-lg! transition-all duration-300"
+                className="mt-4! py-3! text-base! font-semibold! normal-case! shadow-lg! transition-all duration-300"
                 sx={{
                   background:
                     "linear-gradient(135deg, #1A3A5F 0%, #152E4C 100%)!",
@@ -177,19 +216,19 @@ const Login: FC = () => {
                 {isSubmitting ? (
                   <CircularProgress size={24} sx={{ color: "white" }} />
                 ) : (
-                  "ورود به حساب کاربری"
+                  "ثبت نام"
                 )}
               </Button>
             </motion.div>
 
             <Typography className="mt-2! text-center text-sm! text-gray-500!">
-              عضو هتل هاب نیستید؟{" "}
+              قبلا ثبت نام کرده اید؟{" "}
               <Link
-                to="/register"
+                to="/login"
                 className="font-semibold! transition-all duration-300 hover:underline"
                 style={{ color: "#C9A03D" }}
               >
-                ثبت نام کنید
+                وارد شوید
               </Link>
             </Typography>
           </form>
@@ -209,4 +248,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default Register;

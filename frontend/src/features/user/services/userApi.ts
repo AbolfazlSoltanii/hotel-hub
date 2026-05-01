@@ -1,6 +1,6 @@
-import type { RegisterRequest } from "../../types/User/User.ts";
-import axiosInstance from "../axios.config.ts";
-import type { ProfileRequest } from "../../features/user/profile/types/Profile.ts";
+import type { RegisterRequest } from "../types/user.ts";
+import axiosInstance from "../../../services/axios.config.ts";
+import type { ProfileRequest } from "../profile/types/profile.ts";
 
 export const userApi = {
   register: async (data: RegisterRequest) => {

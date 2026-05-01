@@ -5,8 +5,8 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import type { User } from "../types/User/User.ts";
-import type { AuthContextType } from "../types/Auth.ts";
+import type { User } from "../types/user.ts";
+import type { AuthContextType } from "../types/auth.ts";
 import { authReducer, initialState } from "../reducers/authReducer.ts";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

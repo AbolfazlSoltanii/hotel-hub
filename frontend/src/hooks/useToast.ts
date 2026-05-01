@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { type AlertColor } from "@mui/material";
-import type { ToastState } from "../types/Toast.ts";
+import type { ToastState } from "../types/toast.ts";
 
 export const useToast = () => {
   const [toast, setToast] = useState<ToastState>({

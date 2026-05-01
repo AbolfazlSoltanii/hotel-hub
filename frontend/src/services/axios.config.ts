@@ -3,7 +3,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from "axios";
-import type { ErrorResponse, ToastHandler } from "../types/Error.ts";
+import type { ErrorResponse, ToastHandler } from "../types/error.ts";
 
 let globalShowToast: ToastHandler | null = null;
 

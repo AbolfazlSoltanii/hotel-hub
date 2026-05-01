@@ -9,7 +9,7 @@ interface AvatarUploadProps {
   disabled?: boolean;
 }
 
-const AvatarUpload: FC<AvatarUploadProps> = ({
+const AvatarUploadField: FC<AvatarUploadProps> = ({
   value = "",
   onChange,
   disabled = false,
@@ -120,4 +120,4 @@ const AvatarUpload: FC<AvatarUploadProps> = ({
   );
 };
 
-export default AvatarUpload;
+export default AvatarUploadField;

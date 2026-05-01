@@ -1,5 +1,5 @@
-import axiosInstance from "../axios.config.ts";
-import type { LoginRequest } from "../../types/Auth.ts";
+import axiosInstance from "../../../services/axios.config.ts";
+import type { LoginRequest } from "../types/auth.ts";
 
 export const authApi = {
   login: async (data: LoginRequest) => {

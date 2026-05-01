@@ -12,7 +12,7 @@ import { faIR } from "date-fns-jalali/locale/fa-IR";
 import { useToast } from "./hooks/useToast";
 import { setGlobalToastHandler } from "./services/axios.config";
 import Toast from "./ui/Toast";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./features/user/context/AuthContext.tsx";
 import index from "./router";
 
 const theme = createTheme({ direction: "rtl" });

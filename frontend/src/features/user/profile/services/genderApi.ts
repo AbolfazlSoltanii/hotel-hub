@@ -1,4 +1,4 @@
-import axiosInstance from "../axios.config.ts";
+import axiosInstance from "../../../../services/axios.config.ts";
 
 export const genderApi = {
   getAll: async () => {

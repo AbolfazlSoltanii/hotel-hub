@@ -1,4 +1,4 @@
-import type { AuthAction, AuthState } from "../types/Auth.ts";
+import type { AuthAction, AuthState } from "../types/auth.ts";
 
 export const initialState = {
   token: undefined,

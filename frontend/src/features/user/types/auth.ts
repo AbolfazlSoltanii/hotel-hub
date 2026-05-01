@@ -1,4 +1,4 @@
-import type { User } from "./User/User.ts";
+import type { User } from "./user.ts";
 
 export interface LoginRequest {
   phone: string;

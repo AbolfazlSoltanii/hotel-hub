@@ -3,7 +3,7 @@ import { ProtectedRoute } from "../features/ProtectedRoute.tsx";
 import { Suspense } from "react";
 import Loading from "../ui/Loading.tsx";
 import { AppLayout, Login, NotFound } from "./lazyImports.ts";
-import Register from "../pages/auth/Register.tsx";
+import Register from "../pages/user/auth/Register.tsx";
 import Profile from "../pages/user/Profile.tsx";
 
 const index = createBrowserRouter([

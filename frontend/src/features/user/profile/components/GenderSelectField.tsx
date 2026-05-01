@@ -1,9 +1,9 @@
-import { genderApi } from "../../../../services/user/genderApi.ts";
+import { genderApi } from "../services/genderApi.ts";
 import { useEffect, useState } from "react";
-import type { Gender } from "../../../../types/User/Gender.ts";
+import type { Gender } from "../types/gender.ts";
 import { CircularProgress, MenuItem, TextField } from "@mui/material";
 import { type Control, type FieldErrors, Controller } from "react-hook-form";
-import type { ProfileRequest } from "../types/Profile.ts";
+import type { ProfileRequest } from "../types/profile.ts";
 
 interface PhoneInputProps {
   errors: FieldErrors<ProfileRequest>;
@@ -11,7 +11,11 @@ interface PhoneInputProps {
   control: Control<ProfileRequest>;
 }
 
-const GenderSelect = ({ defaultValue, errors, control }: PhoneInputProps) => {
+const GenderSelectField = ({
+  defaultValue,
+  errors,
+  control,
+}: PhoneInputProps) => {
   const [genders, setGenders] = useState<Gender[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -71,4 +75,4 @@ const GenderSelect = ({ defaultValue, errors, control }: PhoneInputProps) => {
   );
 };
 
-export default GenderSelect;
+export default GenderSelectField;
